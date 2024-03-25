@@ -1,29 +1,35 @@
 package tech.helison.contas;
 
 public class ContaInvestimento extends Conta{
-    double taxa;
-    int prazo;
-
-    boolean sacar(double valor) {
-        if(this.saldo >= valor) {
-            this.saldo = this.saldo - (valor * this.taxa);
+    private double taxa;
+    private int prazo;
+    public ContaInvestimento() {
+        super();
+    }
+    public ContaInvestimento(int numero, double saldo, double taxa, int prazo) {
+        super(numero, saldo);
+        this.taxa = taxa;
+        this.prazo = prazo;
+    }
+    public boolean sacar(double valor) {
+        if(getSaldo() >= valor) {
+            setSaldo(getSaldo() - (valor * this.taxa));
             return true;
         } else {
             return false;
         }
     }
 
-    boolean depositar(double valor) {
+    public boolean depositar(double valor) {
         if(valor >= 0) {
-            this.saldo = this.saldo + (valor * this.taxa);
+            setSaldo(getSaldo() + (valor * this.taxa));
             return true;
         } else {
             return false;
         }
     }
-
-    void aplicarRendimento(double taxa) {
-        this.saldo = this.saldo + (1 * taxa);
+    public void aplicarRendimento(double taxa) {
+        setSaldo(getSaldo() + (1 * this.taxa));
     }
 
 }
